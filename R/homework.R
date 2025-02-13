@@ -1,13 +1,12 @@
-#'  CDF of a normal mixture distribution
+#' Compute the CDF of a normal mixture
 #'
-#' @param q 
-#' @param mean_1 
-#' @param sd_1 
-#' @param mean_2 
-#' @param sd_2 
-#' @param mixprob 
-#'
-#' @return 
+#' @param q Quantile value
+#' @param mean_1 Mean of the first normal distribution
+#' @param sd_1 Standard deviation of the first normal distribution
+#' @param mean_2 Mean of the second normal distribution
+#' @param sd_2 Standard deviation of the second normal distribution
+#' @param mixprob Mixing probability for the first distribution
+#' @return CDF value of the mixture distribution
 #' @export
 pnormmix <- function(q, mean_1, sd_1, mean_2, sd_2, mixprob) {
   p_1 <- pnorm(q, mean = mean_1, sd = sd_1)
@@ -15,11 +14,19 @@ pnormmix <- function(q, mean_1, sd_1, mean_2, sd_2, mixprob) {
   return(mixprob * p_1 + (1 - mixprob) * p_2)
 }
 
-#'PDF of a normal mixture distribution
+#' Compute the PDF of a normal mixture distribution
 #'
-#' @param x 
-#' @inheritParams pnormmix
-#' @return
+#' This function calculates the probability density function (PDF) of a mixture
+#' of two normal distributions with specified parameters.
+#'
+#' @param x Numeric value(s) where the PDF is evaluated.
+#' @param mean_1 Mean of the first normal distribution.
+#' @param sd_1 Standard deviation of the first normal distribution.
+#' @param mean_2 Mean of the second normal distribution.
+#' @param sd_2 Standard deviation of the second normal distribution.
+#' @param mixprob Probability weight for the first normal distribution.
+#'
+#' @return A numeric value representing the PDF at `x`.
 #' @export
 dnormmix <- function(x, mean_1, sd_1, mean_2, sd_2, mixprob) {
   d_1 <- dnorm(x, mean = mean_1, sd = sd_1)
@@ -27,11 +34,11 @@ dnormmix <- function(x, mean_1, sd_1, mean_2, sd_2, mixprob) {
   return(mixprob * d_1 + (1 - mixprob) * d_2)
 }
 
-#' random numbers from a normal mixture distribution
+#' Generate random numbers from a normal mixture distribution
 #'
-#' @param n 
+#' @param n Number of random samples to generate.
 #' @inheritParams pnormmix
-#' @return
+#' @return A vector of `n` random values from the mixture distribution.
 #' @export
 rnormmix <- function(n, mean_1, sd_1, mean_2, sd_2, mixprob) {
   u <- runif(n)
@@ -40,11 +47,11 @@ rnormmix <- function(n, mean_1, sd_1, mean_2, sd_2, mixprob) {
   return(x)
 }
 
-#' quantile function (inverse CDF) of a normal mixture distribution
+#' Compute the quantile function (inverse CDF) of a normal mixture distribution
 #'
-#' @param p 
+#' @param p Probability value(s) for quantile calculation.
 #' @inheritParams pnormmix
-#' @return
+#' @return A numeric value representing the quantile at probability `p`.
 #' @export
 qnormmix <- function(p, mean_1, sd_1, mean_2, sd_2, mixprob) {
   quantiles <- numeric(length(p))
@@ -60,3 +67,4 @@ qnormmix <- function(p, mean_1, sd_1, mean_2, sd_2, mixprob) {
   }
   return(quantiles)
 }
+
