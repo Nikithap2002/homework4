@@ -9,7 +9,8 @@ Authors@R: c(
      
     )
   )
-Description: More about what it does (maybe more than one line).
+Description: This package provides functions to compute PDFs, CDFs, 
+    quantiles, and random samples from normal mixture distributions.
     Continuation lines should be indented.
 License: MIT
 Encoding: UTF-8
